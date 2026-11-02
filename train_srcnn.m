@@ -26,7 +26,7 @@ files = dir(fullfile(trainDir, '*.png'));
 nFiles = numel(files);
 pairs = cell(nFiles, 2);
 
-fprintf('--- Chargement et dégradation de la base d''entraînement (%d images) ---\n', nFiles);
+fprintf('Chargement et dégradation de la base d''entraînement (%d images) \n', nFiles);
 for f = 1:nFiles
     % Chargement et conversion de l'image haute résolution d'origine
     hr = to_gray(read_image(fullfile(trainDir, files(f).name)));
@@ -55,7 +55,7 @@ for l = 1:3
     net.b{l} = zeros(1, dims(l + 1)); % Initialisation des biais à zéro
 end
 
-% --- Étape 3 : Initialisation des moments pour l'optimisateur Adam ---
+%  Étape 3 : Initialisation des moments pour l'optimisateur Adam 
 mW = cellfun(@(w) zeros(size(w)), net.W, 'UniformOutput', false); % Premier moment (moyenne du gradient)
 vW = mW;                                                         % Second moment (variance non centrée)
 mb = cellfun(@(b) zeros(size(b)), net.b, 'UniformOutput', false); 
