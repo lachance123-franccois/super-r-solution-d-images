@@ -112,20 +112,20 @@ for it = 1:steps
         Y(:, :, 1, n) = b;
     end
     
-    % Étape 5 : Forward propagation 
+    % Étape 5 : Forward propagation
     [out, cache] = srcnn_forward(net, X);
     
-    % --- Étape 6 : Évaluation de l'erreur (MSE sur le centre du patch) ---
+    % Étape 6 : Évaluation de l'erreur (MSE sur le centre du patch) 
     d = zeros(size(out));
     d(c, c, :, :) = out(c, c, :, :) - Y(c, c, :, :); % Calcul de l'écart sur la zone utile
     dc = d(c, c, :, :);
     history(it) = mean(dc(:).^2); % Sauvegarde de la MSE courante
     
-    % --- Étape 7 : Passe arrière (Backward propagation) ---
+    %  Étape 7 : Passe arrière (Backward propagation) 
     % Le gradient d'entrée de la perte quadratique par rapport à la sortie est : 2 * d / N_pixels
     [gW, gb] = srcnn_backward(net, 2 * d / numel(dc), cache);
     
-    % --- Étape 8 : Mise à jour des paramètres par l'optimisateur Adam ---
+    %  Étape 8 : Mise à jour des paramètres par l'optimisateur Adam 
     c1 = 1 - 0.9^it;     % Correction du biais pour le premier moment (beta1 = 0.9)
     c2 = 1 - 0.999^it;   % Correction du biais pour le second moment (beta2 = 0.999)
     
