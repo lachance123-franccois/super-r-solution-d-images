@@ -70,8 +70,8 @@ c = 7 : P-6;
 history = zeros(steps, 1); % Historique de la fonction de perte
 tic;
 
-fprintf('--- Début de l''entraînement du réseau SRCNN (%d itérations) ---\n', steps);
-% --- Boucle principale d'optimisation ---
+fprintf(' Début de l''entraînement du réseau SRCNN (%d itérations) \n', steps);
+% Boucle principale d'optimisation 
 for it = 1:steps
     % Planification du taux d'apprentissage (Learning Rate Decay à 70% de l'entraînement)
     lr = lr0;
