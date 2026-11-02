@@ -13,7 +13,7 @@
 
 clear; rng(0); % Fixation de la graine aléatoire pour la reproductibilité
 
-% --- Configuration et hyperparamètres ---
+%Configuration et hyperparamètres 
 scale  = 3;     % Facteur de super-résolution
 P      = 33;    % Taille des patchs carrés d'entraînement (33x33)
 B      = 16;    % Taille du mini-batch (nombre de patchs par itération)
@@ -21,7 +21,7 @@ steps  = 12000; % Nombre total d'itérations d'entraînement
 lr0    = 1e-3;  % Taux d'apprentissage initial (learning rate)
 trainDir = fullfile('data', 'train');
 
-% --- Étape 1 : Préparation des paires d'images (MR, HR) ---
+% Étape 1 : Préparation des paires d'images (MR, HR) 
 files = dir(fullfile(trainDir, '*.png'));
 nFiles = numel(files);
 pairs = cell(nFiles, 2);
