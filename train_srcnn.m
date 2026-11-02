@@ -83,7 +83,7 @@ for it = 1:steps
     X = zeros(P, P, 1, B); 
     Y = X;
     
-    % --- Étape 4 : Échantillonnage aléatoire et Augmentation de données ---
+    %  Étape 4 : Échantillonnage aléatoire et Augmentation de données 
     for n = 1:B
         % Sélection d'une image d'entraînement au hasard
         f = randi(size(pairs, 1));
@@ -112,7 +112,7 @@ for it = 1:steps
         Y(:, :, 1, n) = b;
     end
     
-    % --- Étape 5 : Passe avant (Forward propagation) ---
+    % Étape 5 : Forward propagation 
     [out, cache] = srcnn_forward(net, X);
     
     % --- Étape 6 : Évaluation de l'erreur (MSE sur le centre du patch) ---
