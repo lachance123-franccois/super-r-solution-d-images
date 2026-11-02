@@ -39,7 +39,7 @@ for f = 1:nFiles
     pairs{f, 2} = hr;
 end
 
-% --- Étape 2 : Initialisation des paramètres du réseau (Méthode de He / Xavier) ---
+%  Étape 2 : Initialisation des paramètres du réseau (Méthode de He / Xavier) 
 net.f = [9 1 5];       % Tailles des fenêtres de filtres pour les 3 couches convolutives
 dims  = [1 64 32 1];   % Nombre de canaux d'entrée/sortie pour chaque couche [Cin, C1, C2, Cout]
 
@@ -143,19 +143,18 @@ for it = 1:steps
         net.b{l} = net.b{l} - lr * (mb{l} / c1) ./ (sqrt(vb{l} / c2) + 1e-8);
     end
     
-    % --- Étape 9 : Suivi périodique de l'apprentissage (Toutes les 500 itérations) ---
+    %  Étape 9 : Suivi périodique de l'apprentissage (Toutes les 500 itérations) 
     if mod(it, 500) == 0
         % Évaluation du modèle intermédiaire sur l'image entière du cameraman
         u = srcnn_upscale(camLR, size(camHR), net);
         
         % Calcul du PSNR en base décibel en ignorant 3 pixels de bordures de sécurité
         fprintf('iter %5d | MSE d''entraînement : %.3e | PSNR cameraman : %.2f dB | (Temps : %.0f s)\n', it, ...
-            mean(history(it-499:it)), psnr_db(camHR(4:end-3, 4:end-3), ...
-            min(max(u(4:end-3, 4:end-3), 0), 1)), toc);
+            mean(history(it-499:it)), psnr_db(camHR(4:end-3, 4:end-3),min(max(u(4:end-3, 4:end-3), 0), 1)), toc);
     end
 end
 
-% --- Étape 10 : Sauvegarde du modèle final ---
+% Étape 10 : Sauvegarde du modèle final 
 W = net.W; b = net.b; f = net.f;
 save('srcnn_trained.mat', 'W', 'b', 'f', 'history');
-disp('=== Entraînement terminé. Réseau sauvegardé avec succès dans "srcnn_trained.mat" ===');
+disp(' Entraînement terminé. Réseau sauvegardé avec succès dans "srcnn_trained.mat"');
